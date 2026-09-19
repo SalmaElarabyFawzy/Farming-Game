@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Farm.Enums;
 
 public static class InventoryEvents 
 {

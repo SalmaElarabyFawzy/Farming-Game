@@ -1,0 +1,90 @@
+:root {
+}
+
+.itemSlot {
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    max-width: 96px;
+    max-height: 96px;
+    background-color: rgb(61, 8, 0);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-left-color: rgb(175, 46, 45);
+    border-right-color: rgb(175, 46, 45);
+    border-top-color: rgb(175, 46, 45);
+    border-bottom-color: rgb(175, 46, 45);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
+
+.itemSlot__icon {
+    width: 64px;
+    height: 64px;
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.itemSlot__quantityLabel {
+    position: absolute;
+    right: 4px;
+    bottom: 2px;
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    -unity-text-auto-size: best-fit 10px 25px;
+    -unity-text-generator: advanced;
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.itemsSlot__seletionBorder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.itemSlot--hover {
+    transition-duration: 0.15s;
+    transition-property: scale;
+    transition-timing-function: ease-in-out;
+    scale: 1.2 1.2 1.2;
+}
+
+.itemSlot--selected {
+}
+
+.itemSlot--disabled {
+    background-color: rgba(255, 255, 255, 0.392);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}

@@ -1,0 +1,53 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="ItemSlot" src="project://database/Assets/_Project/UI/Templetes/ItemSlot.uxml?fileID=9197481963319205126&amp;guid=c37bbca79406e1d46aae1765c372b1ea&amp;type=3#ItemSlot"/>
+    <Style src="project://database/Assets/_Project/UI/Styles/Inventory.uss?fileID=7433441132597879392&amp;guid=3db3e4427338a5446b2aeeadeaa6a211&amp;type=3#Inventory"/>
+    <ui:VisualElement name="background" class="inventoryBackground" style="flex-grow: 1;"/>
+    <ui:VisualElement name="tootlsPanel" class="panel" style="flex-grow: 1; width: 880px; height: 558px; max-width: 880px; max-height: 558px; top: 50px; left: 50px; position: absolute;">
+        <ui:Label text="Tools" name="toolPanelTitle" class="panel__title"/>
+        <ui:VisualElement name="grid" class="grid">
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+        </ui:VisualElement>
+        <ui:Instance template="ItemSlot" name="handSlot" class="handSlot">
+            <AttributeOverrides element-name="quantityLabel" text="" enabled="true"/>
+        </ui:Instance>
+    </ui:VisualElement>
+    <ui:VisualElement name="itemsPanel" class="panel" style="top: 50px; left: auto; position: absolute; right: 50px;">
+        <ui:Label text="Items" name="itemsPanelTitle" class="panel__title"/>
+        <ui:VisualElement name="grid" class="grid">
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+            <ui:Instance template="ItemSlot"/>
+        </ui:VisualElement>
+        <ui:Instance template="ItemSlot" name="handSlot" enabled="true" class="handSlot">
+            <AttributeOverrides element-name="quantityLabel" enabled="true" text=""/>
+        </ui:Instance>
+    </ui:VisualElement>
+    <ui:VisualElement name="InfoPanel" class="infoPanel">
+        <ui:Label text="ItemName" name="itemsName" class="infoPanelTitle"/>
+        <ui:Label text="Description" name="description" class="infoDescription"/>
+    </ui:VisualElement>
+</ui:UXML>

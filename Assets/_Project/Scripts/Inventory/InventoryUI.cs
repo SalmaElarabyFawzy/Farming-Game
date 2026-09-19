@@ -1,10 +1,8 @@
-using System;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
+using Farm.Enums;
 
-public class UIManager : MonoBehaviour,ITimeTracker
+public class InventoryUI : MonoBehaviour,ITimeTracker
 {
     [Header("Inventory")]
     [SerializeField] private GameObject inventoryUI;
@@ -22,7 +20,7 @@ public class UIManager : MonoBehaviour,ITimeTracker
     [Header("Date and Time")]
     [SerializeField] private TMP_Text date;
     [SerializeField] private TMP_Text time;
-    public static UIManager Instance { get; private set; }
+    public static InventoryUI Instance { get; private set; }
     public TMP_Text InfoName => infoName;
     public TMP_Text InfoDescription => infoDescription;
     private void OnEnable()

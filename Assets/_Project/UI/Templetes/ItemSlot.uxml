@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/Styles/ItemSlot.uss?fileID=7433441132597879392&amp;guid=d188de64a4d88c9498468260f965c439&amp;type=3#ItemSlot"/>
+    <ui:VisualElement name="itemSlot" class="itemSlot">
+        <ui:VisualElement name="icon" class="itemSlot__icon"/>
+        <ui:Label text="" name="quantityLabel" class="itemSlot__quantityLabel"/>
+        <ui:VisualElement name="selectionBorder" class="itemsSlot__seletionBorder"/>
+    </ui:VisualElement>
+</ui:UXML>

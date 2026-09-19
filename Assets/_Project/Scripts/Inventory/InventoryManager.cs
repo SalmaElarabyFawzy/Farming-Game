@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Farm.Enums;
 
 public class InventoryManager : MonoBehaviour
 {

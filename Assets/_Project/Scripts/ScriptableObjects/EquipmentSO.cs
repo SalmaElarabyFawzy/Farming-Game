@@ -1,13 +1,5 @@
 using UnityEngine;
-
-
-public enum EquipmentType
-{
-    Axe,
-    Pickaxe,
-    WateringCan,
-    Hoe
-}
+using Farm.Enums;
 
 
 [CreateAssetMenu(menuName = "Items/EquipmentSO")]

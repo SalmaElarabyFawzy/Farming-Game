@@ -70546,6 +70546,65 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6151069583540641839, guid: 50667f1e664a976418baef2821db777c, type: 3}
   m_PrefabInstance: {fileID: 1693765110}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &661532531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 661532533}
+  - component: {fileID: 661532532}
+  m_Layer: 0
+  m_Name: GameLifeTimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &661532532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661532531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8688b4073f8c7f48b0123e1bf13aea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.Core.DI.GameLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  uiDocument: {fileID: 1875986910}
+  inventoryInitialItems: []
+  inventoryInitialTools:
+  - item: {fileID: 11400000, guid: 9549d843fb6d4894098c45b61b66339b, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: c59145b54eae46949a9e0526ad650277, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 3a3022be30185de439bf932fb38b2b02, type: 2}
+    quantity: 3
+  inventoryItemsCount: 14
+  inventoryToolsCount: 14
+--- !u!4 &661532533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661532531}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.57143, y: 2.5, z: 3.57143}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &662149389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120296,6 +120355,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2525414100899688853, guid: eb208909100843442a081a467356eca6, type: 3}
   m_PrefabInstance: {fileID: 2422581047641662880}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1875986909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875986911}
+  - component: {fileID: 1875986910}
+  m_Layer: 5
+  m_Name: InventoryUIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1875986910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875986909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: b8d275191c6d11245a928b2b3f1ed5e9, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 0ea946a2219b4e340a5462a3db891a26, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1875986911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875986909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1876476397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38f0d89edf0bf2f459d4cec953b1fc1b, type: 3}
@@ -131117,3 +131231,5 @@ SceneRoots:
   - {fileID: 583488540619975920}
   - {fileID: 1946168973}
   - {fileID: 564525321}
+  - {fileID: 1875986911}
+  - {fileID: 661532533}
