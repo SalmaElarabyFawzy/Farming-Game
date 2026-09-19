@@ -47,7 +47,7 @@
         </ui:Instance>
     </ui:VisualElement>
     <ui:VisualElement name="InfoPanel" class="infoPanel">
-        <ui:Label text="ItemName" name="itemsName" class="infoPanelTitle"/>
-        <ui:Label text="Description" name="description" class="infoDescription"/>
+        <ui:Label text="" name="itemsName" class="infoPanelTitle"/>
+        <ui:Label text="" name="description" class="infoDescription"/>
     </ui:VisualElement>
 </ui:UXML>

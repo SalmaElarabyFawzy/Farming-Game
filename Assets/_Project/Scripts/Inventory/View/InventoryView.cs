@@ -13,7 +13,7 @@ namespace Farm.Inventory.View
         private InventoryToolsSectionView toolsSectionView;
         private InventoryItemsSectionView itemsSectionView;
 
-        //DescriptionPanelView descriptionPanelView;
+        private InventoryDescriptionSectionView descriptionSectionView;
 
         private readonly SlotFactory slotFactory;
 
@@ -31,9 +31,11 @@ namespace Farm.Inventory.View
 
             var toolsSectionRoot = uiDocument.rootVisualElement.Q<VisualElement>("tootlsPanel");
             var itemsSectionRoot = uiDocument.rootVisualElement.Q<VisualElement>("itemsPanel");
+            var descriptionSectionRoot = uiDocument.rootVisualElement.Q<VisualElement>("InfoPanel");
 
             toolsSectionView = new InventoryToolsSectionView(toolsSectionRoot, slotFactory);
             itemsSectionView = new InventoryItemsSectionView(itemsSectionRoot, slotFactory);
+            descriptionSectionView = new InventoryDescriptionSectionView(descriptionSectionRoot);
         }
 
         public void BindToolsSectionSlotEntry(int slotIndex, InventoryEntry entry)
@@ -52,6 +54,11 @@ namespace Farm.Inventory.View
         public void BindItemsSectionHandSlotEntry(InventoryEntry entry)
         {
             itemsSectionView.BindHandSlotEntry(entry);
+        }
+
+        public void UpdateDescription(string itemName, string itemDescription)
+        {
+            descriptionSectionView.UpdateDescription(itemName, itemDescription);
         }
 
     }

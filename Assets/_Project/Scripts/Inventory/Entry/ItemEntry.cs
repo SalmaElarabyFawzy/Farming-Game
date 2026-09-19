@@ -14,5 +14,9 @@ namespace Farm.Entry
         {
             this.item = item;
         }
+        public ItemSO GetItem()
+        {
+            return item;
+        }
     }
 }

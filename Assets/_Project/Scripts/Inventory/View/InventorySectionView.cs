@@ -16,13 +16,13 @@ namespace Farm.Inventory.View
 
         public InventoryGridView InventoryGridView => inventoryGridView;
 
-        public InventorySectionView(VisualElement root, SlotFactory slotFactory)
+        public InventorySectionView(VisualElement root, InventorySlotType slotType, SlotFactory slotFactory)
         {
             this.slotFactory = slotFactory;
             var handSlotRoot = root.Q<VisualElement>("handSlot");
             var gridRoot = root.Q<VisualElement>("grid");
-            handSlotView = slotFactory.CreateHandSlotView(handSlotRoot, InventorySlotType.None);
-            inventoryGridView = new InventoryGridView(gridRoot, InventorySlotType.None, slotFactory);
+            handSlotView = slotFactory.CreateHandSlotView(handSlotRoot, slotType);
+            inventoryGridView = new InventoryGridView(gridRoot, slotType, slotFactory);
         }
         public void BindHandSlotEntry(InventoryEntry entry)
         {

@@ -8,10 +8,9 @@ namespace Farm.Inventory.View
 {
     public class InventoryHandSlotView : InventorySlotView
     {
-        public InventoryHandSlotView(VisualElement root, InventorySlotType slotType, EventSystem eventSystem) : base(root,eventSystem, slotType)
+        public InventoryHandSlotView(VisualElement root, InventorySlotType slotType, EventSystem eventSystem) : base(root, eventSystem, slotType)
         {
             Debug.Log("InventoryHandSlotView created");
-            root.RegisterCallback<ClickEvent>(_ => onSlotClick(null));
         }
 
 

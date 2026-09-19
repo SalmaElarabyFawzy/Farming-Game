@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Farm.Core.DesignPatterns.EventSystem;
 using Farm.Enums;
 using Farm.Inventory.Entry;
+using UnityEngine;
 
 namespace Farm.Inventory.Model
 {
@@ -153,6 +155,53 @@ namespace Farm.Inventory.Model
             InventoryEntry tool = tools[index].GetItemEntry() as InventoryEntry;
             equipedTool.SetItemEntry(tool);
             tools[index].SetItemEntry(prevEquipedTool);
+        }
+
+
+        public string GetItemOrToolDescription(InventorySlotType type, int index)
+        {
+            if (type == InventorySlotType.Item)
+                return items[index].GetItemEntry()?.GetItem()?.description ?? string.Empty;
+            else if (type == InventorySlotType.Tool)
+                return tools[index].GetItemEntry()?.GetItem()?.description ?? string.Empty;
+            else
+            {
+                Debug.LogError($"Invalid InventorySlotType: {type}");
+                return string.Empty;
+            }
+        }
+
+        public string GetItemOrToolName(InventorySlotType type, int index)
+        {
+            if (type == InventorySlotType.Item)
+                return items[index].GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
+            else if (type == InventorySlotType.Tool)
+                return tools[index].GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
+            else
+            {
+                Debug.LogError($"Invalid InventorySlotType: {type}");
+                return string.Empty;
+            }
+        }
+
+        public string GetHandSlotItemOrToolDescription(InventorySlotType type)
+        {
+            if (type == InventorySlotType.Item)
+                return equipedItem.GetItemEntry()?.GetItem()?.description ?? string.Empty;
+            else if (type == InventorySlotType.Tool)
+                return equipedTool.GetItemEntry()?.GetItem()?.description ?? string.Empty;
+            else
+                throw new ArgumentOutOfRangeException();
+        }
+
+        public string GetHandSlotItemOrToolName(InventorySlotType type)
+        {
+            if (type == InventorySlotType.Item)
+                return equipedItem.GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
+            else if (type == InventorySlotType.Tool)
+                return equipedTool.GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
+            else
+                throw new ArgumentOutOfRangeException();
         }
 
     }

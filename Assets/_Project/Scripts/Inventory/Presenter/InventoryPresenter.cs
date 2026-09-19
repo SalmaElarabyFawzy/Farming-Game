@@ -4,6 +4,7 @@ using Farm.Enums;
 using Farm.Inventory.Events;
 using Farm.Inventory.Model;
 using Farm.Inventory.View;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Farm.Inventory.Presenter
@@ -28,15 +29,23 @@ namespace Farm.Inventory.Presenter
             eventSystem.Subscribe<InventoryHandItemChangedEvent>(OnInventoryHandItemChanged);
             eventSystem.Subscribe<InventoryGridSlotClickedEvent>(OnInventoryGridSlotClicked);
             eventSystem.Subscribe<InventoryHandSlotClickedEvent>(OnInventoryHandSlotClicked);
+            eventSystem.Subscribe<InventoryGridSlotHoverEvent>(OnInventoryGridSlotHover);
+            eventSystem.Subscribe<InventoryHandSlotHoverEvent>(OnInventoryHandSlotHover);
+            eventSystem.Subscribe<SlotHoverEndedEvent>(OnInventorySlotHoverEnded);
 
         }
+
         public void Dispose()
         {
             eventSystem.Unsubscribe<InventoryGridSlotItemChangedEvent>(OnInventoryGridSlotItemChanged);
             eventSystem.Unsubscribe<InventoryGridSlotClickedEvent>(OnInventoryGridSlotClicked);
             eventSystem.Unsubscribe<InventoryHandItemChangedEvent>(OnInventoryHandItemChanged);
             eventSystem.Unsubscribe<InventoryHandSlotClickedEvent>(OnInventoryHandSlotClicked);
+            eventSystem.Unsubscribe<InventoryHandSlotHoverEvent>(OnInventoryHandSlotHover);
+            eventSystem.Unsubscribe<InventoryGridSlotHoverEvent>(OnInventoryGridSlotHover);
+            eventSystem.Unsubscribe<SlotHoverEndedEvent>(OnInventorySlotHoverEnded);
         }
+
         public void Start()
         {
             inventoryView.Build();
@@ -83,6 +92,27 @@ namespace Farm.Inventory.Presenter
         {
             inventoryModel.ResetEquipedItemOrTool(eventData.SlotType);
         }
+
+
+        private void OnInventoryGridSlotHover(InventoryGridSlotHoverEvent eventData)
+        {
+            string itemDescription = inventoryModel.GetItemOrToolDescription(eventData.SlotType, eventData.SlotIndex);
+            string itemName = inventoryModel.GetItemOrToolName(eventData.SlotType, eventData.SlotIndex);
+            inventoryView.UpdateDescription(itemName, itemDescription);
+        }
+
+        private void OnInventoryHandSlotHover(InventoryHandSlotHoverEvent eventData)
+        {
+            string itemDescription = inventoryModel.GetHandSlotItemOrToolDescription(eventData.SlotType);
+            string itemName = inventoryModel.GetHandSlotItemOrToolName(eventData.SlotType);
+            inventoryView.UpdateDescription(itemName, itemDescription);
+        }
+
+        private void OnInventorySlotHoverEnded(SlotHoverEndedEvent eventData)
+        {
+           inventoryView.UpdateDescription("", "");
+        }
+
 
     }
 }

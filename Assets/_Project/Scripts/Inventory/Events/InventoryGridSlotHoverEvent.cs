@@ -14,5 +14,8 @@ namespace Farm.Inventory.Events
             this.slotIndex = slotIndex;
             this.slotType = slotType;
         }
+
+        public int SlotIndex => slotIndex;
+        public InventorySlotType SlotType => slotType;
     }
 }

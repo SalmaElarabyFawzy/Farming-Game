@@ -9,10 +9,10 @@ namespace Farm.Inventory.View
     public class InventoryGridSlotView : InventorySlotView
     {
         private int slotIndex;
-        public InventoryGridSlotView(VisualElement root, int slotIndex, InventorySlotType slotType, EventSystem eventSystem) : base(root, eventSystem, slotType)
+        public InventoryGridSlotView(VisualElement root, int slotIndex, InventorySlotType slotType, EventSystem eventSystem)
+            : base(root, eventSystem, slotType)
         {
             this.slotIndex = slotIndex;
-            Debug.Log("InventoryGridSlotView created");
         }
 
 
@@ -20,6 +20,7 @@ namespace Farm.Inventory.View
         {
             root.AddToClassList("itemSlot--hover");
             eventSystem.Publish(new InventoryGridSlotHoverEvent(slotIndex, slotType));
+            Debug.Log($"InventoryGridSlotHoverEvent published for slotIndex: {slotIndex}, slotType: {slotType}");
         }
 
         protected override void onSlotClick(ClickEvent evt)
