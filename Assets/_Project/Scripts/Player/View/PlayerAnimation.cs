@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using Farm.Player.Events;
 
-namespace Assets.Scripts.Player
+namespace Farm.Player
 {
     public class PlayerAnimation : MonoBehaviour
     {
         [SerializeField] private Animator animator;
 
-        private void OnEnable()
+       /* private void OnEnable()
         {
             PlayerEvents.OnMove += UpdateMoveAnimation;
             PlayerEvents.OnJump += PlayJumpAnimation;
@@ -27,6 +28,6 @@ namespace Assets.Scripts.Player
         private void PlayJumpAnimation()
         {
             animator.SetTrigger("Jump");
-        }
+        }*/
     }
 }

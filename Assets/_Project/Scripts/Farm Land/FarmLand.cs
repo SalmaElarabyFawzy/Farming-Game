@@ -56,7 +56,7 @@ public class FarmLand : MonoBehaviour, IInteractable, ITimeTracker
     }
     public void OnInteract()
     {
-        ItemSO equipedTool = InventoryManager.Instance.EquipedTool;
+       /*ItemSO equipedTool = InventoryManager.Instance.EquipedTool;
 
         if (equipedTool == null)
             return;
@@ -95,7 +95,7 @@ public class FarmLand : MonoBehaviour, IInteractable, ITimeTracker
                 _currentCrop.Plant(equipedSeed);
 
             }
-        }
+        }*/
 
     }
     private void SwitchLandStatus(FarmLandStatus newStatus)

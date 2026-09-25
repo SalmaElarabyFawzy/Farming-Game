@@ -10,14 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2331634249360033192}
   - component: {fileID: 130014758473999407}
-  - component: {fileID: 2001775563831159441}
-  - component: {fileID: 1488574174941999925}
-  - component: {fileID: 7007392156701822622}
-  - component: {fileID: 8772893246762939060}
-  - component: {fileID: 4759817290782262458}
-  - component: {fileID: 21800022101965938}
   - component: {fileID: 8188271765922948104}
   - component: {fileID: 7838920736467638793}
+  - component: {fileID: 4759817290782262458}
+  - component: {fileID: 2001775563831159441}
+  - component: {fileID: 7007392156701822622}
+  - component: {fileID: 8772893246762939060}
+  - component: {fileID: 21800022101965938}
+  - component: {fileID: 1587922081245399741}
+  - component: {fileID: 8591399209087602412}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -72,119 +73,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!54 &2001775563831159441
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!114 &1488574174941999925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f45d7d807feaa4b80c6326706b5268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerController
-  cameraTransform: {fileID: 0}
-  moveSpeed: 5
-  jumpForce: 5
-  rotationSpeed: 10
---- !u!114 &7007392156701822622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c901e8ded54e3479f6d5297eac1739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerAnimation
-  animator: {fileID: 267731504524104554}
---- !u!114 &8772893246762939060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3313834e512c38d409b5942df4fd18c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerInputHandler
---- !u!136 &4759817290782262458
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 1.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
---- !u!114 &21800022101965938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401517980259524514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502ee16d7f653cf47a29c61a2a4c6653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerInteractions
-  interactPoint: {fileID: 8377792157874609986}
-  interactDistance: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  director: {fileID: 8188271765922948104}
-  plowCutscene: {fileID: 11400000, guid: bdc05d8ce68b77d4b86a73ab9484d4d4, type: 2}
-  waterCutscene: {fileID: 11400000, guid: 354dd2db05986764cbb7e4c79c0cd6fa, type: 2}
-  harvestCutscene: {fileID: 11400000, guid: 276832f4ade2b254884b276d3a6cb1cf, type: 2}
-  plantCutscene: {fileID: 11400000, guid: 2e869d664e3e4654ba330ff8129b8cd1, type: 2}
 --- !u!320 &8188271765922948104
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -241,21 +129,9 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1488574174941999925}
-          m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerController, Assembly-CSharp
-          m_MethodName: CanMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 21800022101965938}
-          m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerInteractions, Assembly-CSharp
-          m_MethodName: CanInteract
+        - m_Target: {fileID: 1587922081245399741}
+          m_TargetAssemblyTypeName: Farm.Player.View.PlayerCutScenesView, Assembly-CSharp
+          m_MethodName: StartCutScene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -267,9 +143,9 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1488574174941999925}
-          m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerController, Assembly-CSharp
-          m_MethodName: CanMove
+        - m_Target: {fileID: 1587922081245399741}
+          m_TargetAssemblyTypeName: Farm.Player.View.PlayerCutScenesView, Assembly-CSharp
+          m_MethodName: FinishCutScene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -279,30 +155,131 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 21800022101965938}
-          m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerInteractions, Assembly-CSharp
-          m_MethodName: CanInteract
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 21800022101965938}
-          m_TargetAssemblyTypeName: Assets.Scripts.Player.PlayerInteractions, Assembly-CSharp
-          m_MethodName: DoInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+--- !u!136 &4759817290782262458
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!54 &2001775563831159441
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &7007392156701822622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c901e8ded54e3479f6d5297eac1739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerAnimation
+  animator: {fileID: 267731504524104554}
+--- !u!114 &8772893246762939060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3313834e512c38d409b5942df4fd18c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerInputHandler
+--- !u!114 &21800022101965938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502ee16d7f653cf47a29c61a2a4c6653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Player.PlayerInteractions
+  interactPoint: {fileID: 8377792157874609986}
+  interactDistance: 5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1587922081245399741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc32cadc2f9cef489a753e1141c5a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.Player.View.PlayerCutScenesView
+  director: {fileID: 8188271765922948104}
+  plowCutscene: {fileID: 11400000, guid: bdc05d8ce68b77d4b86a73ab9484d4d4, type: 2}
+  waterCutscene: {fileID: 11400000, guid: 354dd2db05986764cbb7e4c79c0cd6fa, type: 2}
+  harvestCutscene: {fileID: 11400000, guid: 276832f4ade2b254884b276d3a6cb1cf, type: 2}
+  plantCutscene: {fileID: 11400000, guid: 2e869d664e3e4654ba330ff8129b8cd1, type: 2}
+--- !u!114 &8591399209087602412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401517980259524514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f45d7d807feaa4b80c6326706b5268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.Player.PlayerController
+  cameraTransform: {fileID: 0}
+  moveSpeed: 5
+  jumpForce: 5
+  rotationSpeed: 10
 --- !u!1 &4617676538408425473
 GameObject:
   m_ObjectHideFlags: 0

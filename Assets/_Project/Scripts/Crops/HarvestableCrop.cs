@@ -30,7 +30,7 @@ public class HarvestableCrop : MonoBehaviour, IInteractable
     public void OnInteract()
     {
         Debug.Log("done!!!");
-        InventoryEvents.OnItemAdded(-1 , cropItem , InventorySlotType.Item);
+       // InventoryEvents.OnItemAdded(-1 , cropItem , InventorySlotType.Item);
         Destroy(gameObject);
     }
 

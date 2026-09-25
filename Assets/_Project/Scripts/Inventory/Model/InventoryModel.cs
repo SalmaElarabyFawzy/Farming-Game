@@ -204,5 +204,9 @@ namespace Farm.Inventory.Model
                 throw new ArgumentOutOfRangeException();
         }
 
+        public ItemSO GetEquipedTool()
+        {
+            return equipedTool.GetItemEntry()?.GetItem();
+        }
     }
 }

@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Farm.Inventory.Presenter
 {
-    public class InventoryPresenter : IStartable, IInitializable, IDisposable
+    public class InventoryPresenter : IStartable, IInitializable, IDisposable, IInventoryProvider
     {
 
         private readonly EventSystem eventSystem;
@@ -110,9 +110,13 @@ namespace Farm.Inventory.Presenter
 
         private void OnInventorySlotHoverEnded(SlotHoverEndedEvent eventData)
         {
-           inventoryView.UpdateDescription("", "");
+            inventoryView.UpdateDescription("", "");
         }
 
+        public ItemSO GetEquipedTool()
+        {
+            return inventoryModel.GetEquipedTool();
+        }
 
     }
 }
