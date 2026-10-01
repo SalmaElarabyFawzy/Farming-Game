@@ -1,5 +1,6 @@
 using Assets.Scripts.Interfaces;
 using Farm.Enums;
+using Farm.FarmLand.View;
 using Farm.Inventory.Presenter;
 using Farm.Player.View;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Farm.Player.Commands
 
         public bool TryExecuteCutScene(IInteractable interactable)
         {
-            if (interactable is FarmLand)
+            if (interactable is FarmLandView)
             {
                 var equipedTool = inventoryProvider.GetEquipedTool();
                 if (equipedTool == null)

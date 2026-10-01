@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3729356234208693182}
-  - component: {fileID: 411415510163825632}
+  - component: {fileID: 7687438669064650803}
   m_Layer: 0
   m_Name: Crop
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7890127635691855714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &411415510163825632
+--- !u!114 &7687438669064650803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2270575807550710953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c3aa3db150b8849b02f905c59d3ece, type: 3}
+  m_Script: {fileID: 11500000, guid: 6faa1dcdef43117408faf380d3ee291e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CropBehaviour
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.Crops.View.CropView
   seed: {fileID: 7886617941949236372}
 --- !u!1001 &7886199574771805048
 PrefabInstance:

@@ -11,8 +11,6 @@ public class HarvestableCrop : MonoBehaviour, IInteractable
     private Material _highLightMaterial;
     private const string _highlightProperty = "_Scale";
 
-  
-
     private void Start()
     {
         _highLightMaterial = cropRenderer.materials[1];

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3581741802068999236}
   - component: {fileID: 2268303160687005036}
   - component: {fileID: 8196256406675341033}
-  - component: {fileID: 4838734215940089097}
+  - component: {fileID: 6964216427544011575}
   m_Layer: 6
   m_Name: farmLand
   m_TagString: Untagged
@@ -114,7 +114,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4838734215940089097
+--- !u!114 &6964216427544011575
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,11 +123,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2187771457874235403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d687d90c1e826543b3deeb8101c0199, type: 3}
+  m_Script: {fileID: 11500000, guid: eb4791c4e41fb8c41ba9e17ddf0a3219, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FarmLand
-  dryLandMaterial: {fileID: 2100000, guid: 01aee6ef290bf554ab585c699aae56b5, type: 2}
-  plowedLandMaterial: {fileID: 2100000, guid: 95f8c6cea3869e94b88f94ddb79d811f, type: 2}
-  wateredLandMaterial: {fileID: 2100000, guid: 1a842c53781e0aa45941fbc6b5d86131, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.FarmLand.View.FarmLandView
+  dryLandMaterial: {fileID: 2100000, guid: ecdab134e4ac880499393ae7f5475304, type: 2}
+  plowedLandMaterial: {fileID: 2100000, guid: b0b4873fe3e96ef4c9b74eb8c375564b, type: 2}
+  wateredLandMaterial: {fileID: 2100000, guid: e8e262a2a2d32f14c818a582375f751c, type: 2}
   highlightIntensity: 1.03
   cropPrefab: {fileID: 2270575807550710953, guid: 1b453724e7a18c6478a9053968e0d7a2, type: 3}
