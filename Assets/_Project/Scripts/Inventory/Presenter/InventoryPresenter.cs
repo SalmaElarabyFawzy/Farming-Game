@@ -1,6 +1,7 @@
 using System;
 using Farm.Core.DesignPatterns.EventSystem;
 using Farm.Enums;
+using Farm.HUD.Events;
 using Farm.Inventory.Events;
 using Farm.Inventory.Model;
 using Farm.Inventory.View;
@@ -15,6 +16,8 @@ namespace Farm.Inventory.Presenter
         private readonly EventSystem eventSystem;
         private InventoryModel inventoryModel;
         private InventoryView inventoryView;
+
+        private bool isInventoryVisible = false;
 
         public InventoryPresenter(InventoryModel inventoryModel, InventoryView inventoryView, EventSystem eventSystem)
         {
@@ -32,6 +35,7 @@ namespace Farm.Inventory.Presenter
             eventSystem.Subscribe<InventoryGridSlotHoverEvent>(OnInventoryGridSlotHover);
             eventSystem.Subscribe<InventoryHandSlotHoverEvent>(OnInventoryHandSlotHover);
             eventSystem.Subscribe<SlotHoverEndedEvent>(OnInventorySlotHoverEnded);
+            eventSystem.Subscribe<InventoryButtonClickedEvent>(OnInventoryButtonClicked);
 
         }
 
@@ -50,6 +54,8 @@ namespace Farm.Inventory.Presenter
         {
             inventoryView.Build();
             inventoryModel.Build();
+            isInventoryVisible = false;
+            inventoryView.HideInventoryView();
         }
 
 
@@ -111,6 +117,14 @@ namespace Farm.Inventory.Presenter
         private void OnInventorySlotHoverEnded(SlotHoverEndedEvent eventData)
         {
             inventoryView.UpdateDescription("", "");
+        }
+        private void OnInventoryButtonClicked(InventoryButtonClickedEvent eventData)
+        {
+            isInventoryVisible = !isInventoryVisible;
+            if (!isInventoryVisible)
+                inventoryView.HideInventoryView();
+            else
+                inventoryView.ShowInventoryView();
         }
 
         public ItemSO GetEquipedTool()

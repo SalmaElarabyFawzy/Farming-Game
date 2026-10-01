@@ -13,6 +13,7 @@ using Farm.Player.View;
 using Farm.Player.Model;
 using Farm.Player.Commands;
 using Farm.Player.Presenter;
+using Farm.HUD.View;
 
 namespace Farm.Core.DI
 {
@@ -20,7 +21,7 @@ namespace Farm.Core.DI
     {
 
         [Header("Inventory")]
-        [SerializeField] private UIDocument uiDocument;
+        [SerializeField] private UIDocument inventoryDocument;
         [SerializeField] private List<InventoryEntry> inventoryInitialItems;
         [SerializeField] private List<InventoryEntry> inventoryInitialTools;
         [SerializeField] private int inventoryItemsCount;
@@ -32,6 +33,9 @@ namespace Farm.Core.DI
         [SerializeField] private PlayerCutScenesView playerCutScenesView;
         [SerializeField] private PlayerInputHandlerView playerInputHandlerView;
         [SerializeField] private PlayerControllerView playerControllerView;
+
+        [Header("HUD")]
+        [SerializeField] private UIDocument hudDocument;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -58,10 +62,14 @@ namespace Farm.Core.DI
             builder.Register<PlayerPlowCutSceneCommand>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             //Inventory
-            builder.RegisterComponent(uiDocument);
             builder.Register<InventoryModel>(resolver => new InventoryModel(inventoryItemsCount, inventoryToolsCount, inventoryInitialItems, inventoryInitialTools, resolver.Resolve<EventSystem>()), Lifetime.Singleton).AsSelf();
-            builder.Register<InventoryView>(resolver => new InventoryView(uiDocument, resolver.Resolve<SlotFactory>()), Lifetime.Singleton).AsSelf();
+            builder.Register<InventoryView>(resolver => new InventoryView(inventoryDocument, resolver.Resolve<SlotFactory>()), Lifetime.Singleton).AsSelf();
             builder.RegisterEntryPoint<InventoryPresenter>(Lifetime.Singleton).AsSelf();
+
+            //HUD
+            builder.Register<HUDView>(resolver => new HUDView(resolver.Resolve<EventSystem>(), hudDocument), Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
 
         }
     }

@@ -1,0 +1,13 @@
+:root {
+}
+
+.inventory-toggle-button {
+    right: 35px;
+    bottom: 35px;
+    background-image: url("project://database/Assets/_Project/Art/Sprites/inventory%20button.png?fileID=448617982&guid=37734a63a529d14408c2b1bd10e6d9ed&type=3#inventory button_0");
+    width: 148px;
+    max-width: 148px;
+    height: 124px;
+    max-height: 124px;
+    position: absolute;
+}

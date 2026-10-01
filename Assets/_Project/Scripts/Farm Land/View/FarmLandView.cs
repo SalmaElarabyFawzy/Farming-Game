@@ -66,7 +66,7 @@ namespace Farm.FarmLand.View
 
         public void OnInteract()
         {
-            _farmPresenter.Interact();
+           // _farmPresenter.Interact();
         }
 
         public void InstantiateCrop(SeedSO seedData)
