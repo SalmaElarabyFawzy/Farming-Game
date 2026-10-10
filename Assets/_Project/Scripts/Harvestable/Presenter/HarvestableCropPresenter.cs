@@ -15,6 +15,15 @@ namespace Farm.HarvestableCrop.Presenter
             _view = view;
         }
 
+        public void Start()
+        {
+            _model.OnCropHarvested += OnCropHarvested;
+        }
+        public void Dispose()
+        {
+            _model.OnCropHarvested -= OnCropHarvested;
+        }
+
         public void SetFarmTile(IFarmTile farmTile)
         {
             _model.SetFarmTile(farmTile);
@@ -22,6 +31,10 @@ namespace Farm.HarvestableCrop.Presenter
         public void HarvestCrop()
         {
             _model.HarvestCrop();
+        }
+        private void OnCropHarvested()
+        {
+            _view.DestroyHarvestableCrop();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Farm.Core.DesignPatterns.EventSystem;
 using Farm.Enums;
+using Farm.HarvestableCrop.Events;
 using Farm.HUD.Events;
 using Farm.Inventory.Events;
 using Farm.Inventory.Model;
@@ -36,6 +37,7 @@ namespace Farm.Inventory.Presenter
             eventSystem.Subscribe<InventoryHandSlotHoverEvent>(OnInventoryHandSlotHover);
             eventSystem.Subscribe<SlotHoverEndedEvent>(OnInventorySlotHoverEnded);
             eventSystem.Subscribe<InventoryButtonClickedEvent>(OnInventoryButtonClicked);
+            eventSystem.Subscribe<CropHarvestedEvent>(OnCropHarvested);
 
         }
 
@@ -48,6 +50,7 @@ namespace Farm.Inventory.Presenter
             eventSystem.Unsubscribe<InventoryHandSlotHoverEvent>(OnInventoryHandSlotHover);
             eventSystem.Unsubscribe<InventoryGridSlotHoverEvent>(OnInventoryGridSlotHover);
             eventSystem.Unsubscribe<SlotHoverEndedEvent>(OnInventorySlotHoverEnded);
+            eventSystem.Unsubscribe<CropHarvestedEvent>(OnCropHarvested);
         }
 
         public void Start()
@@ -130,6 +133,11 @@ namespace Farm.Inventory.Presenter
         public ItemSO GetEquipedTool()
         {
             return inventoryModel.GetEquipedTool();
+        }
+
+        private void OnCropHarvested(CropHarvestedEvent eventData)
+        {
+           inventoryModel.AddItemToInventory(eventData.CropItem, eventData.InventoryType);
         }
 
     }

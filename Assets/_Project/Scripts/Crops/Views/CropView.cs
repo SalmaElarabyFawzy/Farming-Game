@@ -18,7 +18,7 @@ namespace Farm.Crops.View
     {
         [SerializeField] private GameObject seed;
         private GameObject _seeding;
-        private HarvestableCropView _harvestable;
+        private GameObject _harvestable;
 
         private EventSystem _eventSystem;
         private CropPresenter _cropPresenter;
@@ -53,10 +53,11 @@ namespace Farm.Crops.View
             Debug.Log("CropView InstantiateVisuals");
             _seeding = Instantiate(seeding, transform);
             _seeding.transform.localPosition = Vector3.zero;
-            _harvestable = _harvestableCropFactory.CreateHarvestableCrop(harvestable.GetComponent<HarvestableCropView>(), transform, Vector3.zero);
-            if (_harvestable != null)
+            var harvestableCrop = _harvestableCropFactory.CreateHarvestableCrop(harvestable.GetComponent<HarvestableCropView>(), transform, Vector3.zero);
+            _harvestable = harvestableCrop.gameObject;
+            if (harvestableCrop != null)
             {
-                _harvestable.SetFarmTile(_farmTile);
+                harvestableCrop.SetFarmTile(_farmTile);
             }
         }
         public void Plant(SeedSO seedData, IFarmTile farmTile)
@@ -78,7 +79,7 @@ namespace Farm.Crops.View
         {
             seed.SetActive(false);
             _seeding.SetActive(false);
-            _harvestable.gameObject.SetActive(false);
+            _harvestable.SetActive(false);
 
             switch (newState)
             {
@@ -89,7 +90,7 @@ namespace Farm.Crops.View
                     _seeding.SetActive(true);
                     break;
                 case CropState.Harvestable:
-                    _harvestable.gameObject.SetActive(true);
+                    _harvestable.SetActive(true);
                     break;
             }
         }

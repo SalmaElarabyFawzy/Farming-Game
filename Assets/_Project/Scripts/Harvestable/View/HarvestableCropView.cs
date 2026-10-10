@@ -1,4 +1,5 @@
 using Assets.Scripts.Interfaces;
+using Farm.Core.DesignPatterns.EventSystem;
 using Farm.FarmLand.Interfaces;
 using Farm.HarvestableCrop.Model;
 using Farm.HarvestableCrop.Presenter;
@@ -20,10 +21,11 @@ namespace Farm.HarvestableCrop.View
         private HarvestableCropPresenter _presenter;
 
         [Inject]
-        public void Construct(IInventoryProvider inventoryProvider)
+        public void Construct(EventSystem eventSystem)
         {
-            var model = new HarvestableCropModel(cropItem, inventoryProvider);
+            var model = new HarvestableCropModel(cropItem, eventSystem);
             _presenter = new HarvestableCropPresenter(model, this);
+            _presenter.Start();
         }
 
         private void Start()
@@ -47,7 +49,10 @@ namespace Farm.HarvestableCrop.View
         public void OnInteract()
         {
             _presenter.HarvestCrop();
-            Destroy(gameObject,.1f);
+        }
+        public void DestroyHarvestableCrop()
+        {
+            Destroy(gameObject);
         }
 
     }

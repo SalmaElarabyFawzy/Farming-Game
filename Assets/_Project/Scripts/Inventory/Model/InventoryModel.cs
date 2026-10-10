@@ -37,8 +37,8 @@ namespace Farm.Inventory.Model
         {
             InitializeInventoryItemsSlots(inventoryItemsCount);
             InitializeInventoryToolsSlots(inventoryToolsCount);
-            SetInventoryItems(itemsInitial);
-            SetInventoryTools(toolsInitial);
+            SetInventoryItems(InventorySlotType.Item, itemsInitial);
+            SetInventoryItems(InventorySlotType.Tool, toolsInitial);
 
             equipedItem = new InventoryHandSlotModel(InventorySlotType.Item, eventSystem);
             equipedTool = new InventoryHandSlotModel(InventorySlotType.Tool, eventSystem);
@@ -62,151 +62,123 @@ namespace Farm.Inventory.Model
             }
         }
 
-        private void SetInventoryTools(List<InventoryEntry> tools)
-        {
-            for (int i = 0; i < tools.Count; i++)
-            {
-                SetToolInInventory(tools[i]);
-            }
-        }
-
-        public void SetToolInInventory(InventoryEntry tool)
-        {
-            for (int i = 0; i < tools.Count; i++)
-            {
-                if (tools[i].GetItemEntry() == null)
-                {
-                    tools[i].SetItemEntry(tool);
-                    break;
-                }
-            }
-        }
-
-        private void SetInventoryItems(List<InventoryEntry> items)
+        private void SetInventoryItems(InventorySlotType type, List<InventoryEntry> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                SetItemInInventory(items[i]);
+                SetItemInEmptyInventorySlot(type, items[i]);
             }
         }
 
-        public void SetItemInInventory(InventoryEntry item)
+        private void SetItemInEmptyInventorySlot(InventorySlotType type, InventoryEntry item)
         {
-            for (int i = 0; i < items.Count; i++)
+            int index = GetEmptySlotIndex(type);
+            List<InventoryGridSlotModel> targetList = type == InventorySlotType.Item ? items : tools;
+            if (index == -1)
             {
-                if (items[i].GetItemEntry() == null)
-                {
-                    items[i].SetItemEntry(item);
-                    break;
-                }
+                Debug.LogWarning("No empty slot available in the items section.");
+                return;
             }
+            targetList[index].SetItemEntry(item);
         }
-
         public void ResetEquipedItemOrTool(InventorySlotType type)
         {
-            if (type == InventorySlotType.Item)
-                ResetEquipedItem();
-            else if (type == InventorySlotType.Tool)
-                ResetEquipedTool();
+            InventoryEntry equipedEntry = type == InventorySlotType.Item ? equipedItem.GetItemEntry() as InventoryEntry : equipedTool.GetItemEntry() as InventoryEntry;
+            SetItemInEmptyInventorySlot(type, equipedEntry);
         }
         public void SetEquipedItemOrTool(int index, InventorySlotType type)
         {
+            List<InventoryGridSlotModel> targetList = type == InventorySlotType.Item ? items : tools;
+            InventoryHandSlotModel equipedEntry = type == InventorySlotType.Item ? equipedItem : equipedTool;
 
-            if (type == InventorySlotType.Item)
-                SetEquipedItem(index);
-            else if (type == InventorySlotType.Tool)
-                SetEquipedTool(index);
+            InventoryEntry prevEquipedItem = equipedEntry.GetItemEntry() as InventoryEntry;
+            InventoryEntry item = targetList[index].GetItemEntry() as InventoryEntry;
 
+            equipedEntry.SetItemEntry(item);
+            targetList[index].SetItemEntry(prevEquipedItem);
         }
-        private void ResetEquipedItem()
+        private int GetEmptySlotIndex(InventorySlotType type)
         {
-            for (int i = 0; i < items.Count; i++)
+            List<InventoryGridSlotModel> targetList = type == InventorySlotType.Item ? items : tools;
+
+            for (int i = 0; i < targetList.Count; i++)
             {
-                if (items[i].GetItemEntry() == null)
-                {
-                    items[i].SetItemEntry(equipedItem.GetItemEntry());
-                    equipedItem.SetItemEntry(null);
-                    break;
-                }
+                if (targetList[i].GetItemEntry() == null)
+                    return i;
             }
+            return -1;
         }
-        private void ResetEquipedTool()
-        {
-            for (int i = 0; i < tools.Count; i++)
-            {
-                if (tools[i].GetItemEntry() == null)
-                {
-                    tools[i].SetItemEntry(equipedTool.GetItemEntry());
-                    equipedTool.SetItemEntry(null);
-                    break;
-                }
-            }
-        }
-        private void SetEquipedItem(int index)
-        {
-            InventoryEntry prevEquipedItem = equipedItem.GetItemEntry() as InventoryEntry;
-            InventoryEntry item = items[index].GetItemEntry() as InventoryEntry;
-            equipedItem.SetItemEntry(item);
-            items[index].SetItemEntry(prevEquipedItem);
-        }
-        private void SetEquipedTool(int index)
-        {
-            InventoryEntry prevEquipedTool = equipedTool.GetItemEntry() as InventoryEntry;
-            InventoryEntry tool = tools[index].GetItemEntry() as InventoryEntry;
-            equipedTool.SetItemEntry(tool);
-            tools[index].SetItemEntry(prevEquipedTool);
-        }
-
-
         public string GetItemOrToolDescription(InventorySlotType type, int index)
         {
-            if (type == InventorySlotType.Item)
-                return items[index].GetItemEntry()?.GetItem()?.description ?? string.Empty;
-            else if (type == InventorySlotType.Tool)
-                return tools[index].GetItemEntry()?.GetItem()?.description ?? string.Empty;
-            else
+            if(InventorySlotType.None == type)
             {
                 Debug.LogError($"Invalid InventorySlotType: {type}");
                 return string.Empty;
             }
+            List<InventoryGridSlotModel> targetList = type == InventorySlotType.Item ? items : tools;
+            return targetList[index].GetItemEntry()?.GetItem()?.description ?? string.Empty;
         }
 
         public string GetItemOrToolName(InventorySlotType type, int index)
         {
-            if (type == InventorySlotType.Item)
-                return items[index].GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
-            else if (type == InventorySlotType.Tool)
-                return tools[index].GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
-            else
+            if(InventorySlotType.None == type)
             {
                 Debug.LogError($"Invalid InventorySlotType: {type}");
                 return string.Empty;
             }
+            List<InventoryGridSlotModel> targetList = type == InventorySlotType.Item ? items : tools;
+            return targetList[index].GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
         }
 
         public string GetHandSlotItemOrToolDescription(InventorySlotType type)
         {
-            if (type == InventorySlotType.Item)
-                return equipedItem.GetItemEntry()?.GetItem()?.description ?? string.Empty;
-            else if (type == InventorySlotType.Tool)
-                return equipedTool.GetItemEntry()?.GetItem()?.description ?? string.Empty;
-            else
-                throw new ArgumentOutOfRangeException();
+            if(InventorySlotType.None == type)
+            {
+                Debug.LogError($"Invalid InventorySlotType: {type}");
+                return string.Empty;
+            }
+            
+            InventoryHandSlotModel equipedEntry = type == InventorySlotType.Item ? equipedItem : equipedTool;
+            return equipedEntry.GetItemEntry()?.GetItem()?.description ?? string.Empty;
         }
 
         public string GetHandSlotItemOrToolName(InventorySlotType type)
         {
-            if (type == InventorySlotType.Item)
-                return equipedItem.GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
-            else if (type == InventorySlotType.Tool)
-                return equipedTool.GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
-            else
-                throw new ArgumentOutOfRangeException();
+            if(InventorySlotType.None == type)
+            {
+                Debug.LogError($"Invalid InventorySlotType: {type}");
+                return string.Empty;
+            }
+            InventoryHandSlotModel equipedEntry = type == InventorySlotType.Item ? equipedItem : equipedTool;
+            return equipedEntry.GetItemEntry()?.GetItem()?.itemName ?? string.Empty;
         }
 
         public ItemSO GetEquipedTool()
         {
             return equipedTool.GetItemEntry()?.GetItem();
+        }
+        public void AddItemToInventory(ItemSO item, InventorySlotType slotType)
+        {
+            if (SearchForSimilarItemInInventoryAndUpdateQuantity(item, slotType))
+                return;
+
+            InventoryEntry newEntry = new InventoryEntry(item, 1);
+            SetItemInEmptyInventorySlot(slotType, newEntry);
+        }
+        private bool SearchForSimilarItemInInventoryAndUpdateQuantity(ItemSO item, InventorySlotType slotType)
+        {
+            List<InventoryGridSlotModel> targetList = slotType == InventorySlotType.Item ? items : tools;
+
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                InventoryEntry entry = targetList[i].GetItemEntry() as InventoryEntry;
+                if (entry != null && entry.GetItem() == item)
+                {
+                    entry.UpdateQuantity(entry.Quantity + 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
