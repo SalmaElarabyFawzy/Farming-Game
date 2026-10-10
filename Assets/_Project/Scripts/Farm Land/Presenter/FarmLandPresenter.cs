@@ -22,12 +22,14 @@ namespace Farm.FarmLand.Presenter
         {
             _model.OnLandStatusChanged += HandleLandStatusChanged;
             _model.OnCropPlanted += HandleCropPlanted;
+            _model.OnLandWatered += WaterCrop;
         }
 
         public void Dispose()
         {
             _model.OnLandStatusChanged -= HandleLandStatusChanged;
             _model.OnCropPlanted -= HandleCropPlanted;
+            _model.OnLandWatered -= WaterCrop;
         }
 
         private void HandleLandStatusChanged(FarmLandStatus status)
@@ -43,6 +45,18 @@ namespace Farm.FarmLand.Presenter
         public void Interact()
         {
             _model.Interact();
+        }
+        public void WaterCrop()
+        {
+            _view.WaterCrop();
+        }
+        public void HarvestCrop()
+        {
+            _model.HarvestCrop();
+        }
+        public void ClockUpdated(GameTimeStamp timeStamp)
+        {
+            _model.ClockUpdated(timeStamp);
         }
 
     }

@@ -1,24 +1,23 @@
+using System;
 using Farm.Core.DesignPatterns.EventSystem;
 using Farm.Crops.Enums;
 using Farm.Crops.Events;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Farm.Crops.Model
 {
-    public class CropModel : ITickable
+    public class CropModel
     {
+        public event Action<GameObject, GameObject> OnInstantiateCropVisuals;
+        public event Action<CropState> OnSwitchCropState;
+
         private CropState _currentCropState;
         private int _growthDaysInMinutes = 0;
         private int _maxGrowthDaysInMinutes = 0;
 
-        private readonly EventSystem _eventSystem;
+        private bool _isWatered = false;
 
-        public CropModel(EventSystem eventSystem)
-        {
-            _eventSystem = eventSystem;
-        }
-
-// TODO: Add a method to reset the crop state and growth days when a new seed is planted or when the crop is harvested. This will ensure that the crop model can be reused for multiple planting cycles without retaining old state information.
         public void Plant(SeedSO seed)
         {
             var _seedToGrow = seed;
@@ -26,17 +25,30 @@ namespace Farm.Crops.Model
             var cropItem = _seedToGrow.cropItem;
             var _harvestable = cropItem.itemPrefab;
 
-            _eventSystem.Publish(new InstantiateCropVisualsEvent(_seeding, _harvestable));
+            InvokeInstantiateCropVisuals(_seeding, _harvestable);
 
             int maxGrowthDays = _seedToGrow.daysToGrow;
             int maxGrowthHours = GameTimeStamp.DaysToHours(maxGrowthDays);
             _maxGrowthDaysInMinutes = GameTimeStamp.HoursToMinutes(maxGrowthHours);
 
-            _eventSystem.Publish(new SwitchCropStateEvent(CropState.Seed));
+            InvokeSwitchCropState(CropState.Seed);
             _currentCropState = CropState.Seed;
         }
+        public void WaterCrop()
+        {
+            Debug.Log($"CropModel WaterCrop: {_isWatered}");
+            _isWatered = !_isWatered;
+        }
+        private void InvokeInstantiateCropVisuals(GameObject seedingPrefab, GameObject harvestablePrefab)
+        {
+            OnInstantiateCropVisuals?.Invoke(seedingPrefab, harvestablePrefab);
+        }
+        private void InvokeSwitchCropState(CropState newState)
+        {
+            OnSwitchCropState?.Invoke(newState);
+        }
 
-        public void Tick()
+        public void ClockUpdated(GameTimeStamp timeStamp)
         {
             Grow();
         }
@@ -44,15 +56,18 @@ namespace Farm.Crops.Model
         {
             _growthDaysInMinutes++;
 
+            if (!_isWatered)
+                return;
+
             if (_growthDaysInMinutes >= _maxGrowthDaysInMinutes / 2 && _currentCropState == CropState.Seed) ;
             {
-                _eventSystem.Publish(new SwitchCropStateEvent(CropState.Seeding));
+                InvokeSwitchCropState(CropState.Seeding);
                 _currentCropState = CropState.Seeding;
             }
 
             if (_growthDaysInMinutes >= _maxGrowthDaysInMinutes && _currentCropState == CropState.Seeding)
             {
-                _eventSystem.Publish(new SwitchCropStateEvent(CropState.Harvestable));
+                InvokeSwitchCropState(CropState.Harvestable);
                 _currentCropState = CropState.Harvestable;
             }
 

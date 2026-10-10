@@ -1,19 +1,21 @@
-
-
 using System;
 using Assets.Scripts.Interfaces;
 using Farm.Core.DesignPatterns.EventSystem;
+using Farm.Crops.Factory;
 using Farm.Crops.View;
 using Farm.FarmLand.Enums;
+using Farm.FarmLand.Interfaces;
 using Farm.FarmLand.Model;
 using Farm.FarmLand.Presenter;
 using Farm.Inventory.Presenter;
+using Farm.TimeManager.Interfaces;
+using Farm.TimeManager.Event;
 using UnityEngine;
 using VContainer;
 
 namespace Farm.FarmLand.View
 {
-    public class FarmLandView : MonoBehaviour, IInteractable, IDisposable   
+    public class FarmLandView : MonoBehaviour, IInteractable, IDisposable, IFarmTile
     {
         [Header("Land Appearance")]
         [SerializeField] private Material dryLandMaterial;
@@ -21,8 +23,6 @@ namespace Farm.FarmLand.View
         [SerializeField] private Material wateredLandMaterial;
         [SerializeField] private float highlightIntensity = 1.03f;
 
-        [Header("Crop")]
-        [SerializeField] private GameObject cropPrefab;
 
         private MeshRenderer _landRenderer;
         private Material _highLightMaterial;
@@ -31,12 +31,17 @@ namespace Farm.FarmLand.View
         public Collider Collider => _collider;
 
         private FarmLandPresenter _farmPresenter;
-
+        private ICropFactory _cropFactory;
+        private CropView _currentCrop;
+        private EventSystem _eventSystem;
 
         [Inject]
-        public void Construct(IInventoryProvider inventoryProvider, EventSystem eventSystem)
+        public void Construct(IInventoryProvider inventoryProvider, ITimeManager timeManager, EventSystem eventSystem, ICropFactory cropFactory)
         {
-            FarmLandModel model = new FarmLandModel(inventoryProvider);
+
+            _cropFactory = cropFactory;
+            _eventSystem = eventSystem;
+            FarmLandModel model = new FarmLandModel(inventoryProvider, timeManager);
             _farmPresenter = new FarmLandPresenter(model, this);
         }
         private void Awake()
@@ -47,6 +52,7 @@ namespace Farm.FarmLand.View
         }
         private void Start()
         {
+            _eventSystem.Subscribe<ClockUpdatedEvent>(ClockUpdated);
             _farmPresenter.Start();
         }
         public void Dispose()
@@ -66,15 +72,31 @@ namespace Farm.FarmLand.View
 
         public void OnInteract()
         {
-           // _farmPresenter.Interact();
+            _farmPresenter.Interact();
         }
 
         public void InstantiateCrop(SeedSO seedData)
         {
-            GameObject cropInstance = Instantiate(cropPrefab, transform);
-            Vector3 plantPos = _collider.bounds.extents;
-            cropInstance.transform.localPosition = new Vector3(0, plantPos.y, 0);
-            cropInstance.GetComponent<CropView>().Plant(seedData);
+            var landColiderExtents = _collider.bounds.extents;
+            var seedPosition = new Vector3(0f, landColiderExtents.y, 0f);
+            _currentCrop = _cropFactory.CreateCrop(seedData, transform, seedPosition, this);
+
+        }
+        public void WaterCrop()
+        {
+            if (_currentCrop != null)
+            {
+                _currentCrop.WaterCrop();
+            }
+        }
+
+        public void HarvestCrop()
+        {
+            if (_currentCrop != null)
+            {
+                _farmPresenter.HarvestCrop();
+                _currentCrop = null;
+            }
         }
 
         public void UpdateLandAppearance(FarmLandStatus _currentStatus)
@@ -90,10 +112,14 @@ namespace Farm.FarmLand.View
                     break;
                 case FarmLandStatus.Watered:
                     materials[0] = wateredLandMaterial;
-                    // _timeLandWatered = TimeManager.instance.GetTimeStamp();
                     break;
             }
             _landRenderer.materials = materials;
+        }
+
+        public void ClockUpdated(ClockUpdatedEvent eventData)
+        {
+            _farmPresenter.ClockUpdated(eventData.GameTimeStamp);
         }
     }
 }

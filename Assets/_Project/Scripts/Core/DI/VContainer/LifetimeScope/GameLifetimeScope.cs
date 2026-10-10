@@ -14,6 +14,10 @@ using Farm.Player.Model;
 using Farm.Player.Commands;
 using Farm.Player.Presenter;
 using Farm.HUD.View;
+using Farm.FarmLand.View;
+using Farm.Crops.View;
+using Farm.Crops.Factory;
+using Farm.TimeManager.View;
 
 namespace Farm.Core.DI
 {
@@ -37,12 +41,19 @@ namespace Farm.Core.DI
         [Header("HUD")]
         [SerializeField] private UIDocument hudDocument;
 
+        [Header("Crops")]
+        [SerializeField] private CropView cropView;
+
+        [Header("Time Manager")]
+        [SerializeField] private TimeManagerView timeManagerView;
+
 
         protected override void Configure(IContainerBuilder builder)
         {
             // Register Services
             builder.Register<EventSystem>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SlotFactory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<ICropFactory>(resolver => new CropFactory(cropView, resolver), Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             // Register Player
             builder.RegisterComponent(playerInteractionsView);
@@ -62,14 +73,35 @@ namespace Farm.Core.DI
             builder.Register<PlayerPlowCutSceneCommand>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             //Inventory
-            builder.Register<InventoryModel>(resolver => new InventoryModel(inventoryItemsCount, inventoryToolsCount, inventoryInitialItems, inventoryInitialTools, resolver.Resolve<EventSystem>()), Lifetime.Singleton).AsSelf();
-            builder.Register<InventoryView>(resolver => new InventoryView(inventoryDocument, resolver.Resolve<SlotFactory>()), Lifetime.Singleton).AsSelf();
-            builder.RegisterEntryPoint<InventoryPresenter>(Lifetime.Singleton).AsSelf();
+            builder.Register<InventoryModel>(
+                resolver => new InventoryModel(inventoryItemsCount, inventoryToolsCount, inventoryInitialItems, inventoryInitialTools, 
+                resolver.Resolve<EventSystem>()
+                ), Lifetime.Singleton).AsSelf();
+
+            builder.Register<InventoryView>(
+                resolver => new InventoryView(inventoryDocument, 
+                resolver.Resolve<SlotFactory>()
+                ), Lifetime.Singleton).AsSelf();
+
+            builder.RegisterEntryPoint<InventoryPresenter>(Lifetime.Singleton)
+                .As<IInventoryProvider>()
+                .AsSelf();
 
             //HUD
             builder.Register<HUDView>(resolver => new HUDView(resolver.Resolve<EventSystem>(), hudDocument), Lifetime.Singleton)
                 .AsImplementedInterfaces()
                 .AsSelf();
+
+
+            //Register FarmLand
+            builder.RegisterBuildCallback(resolver =>
+            {
+                foreach (var land in FindObjectsByType<FarmLandView>(FindObjectsSortMode.None))
+                    resolver.Inject(land);
+            });
+
+            //Register TimeManager
+            builder.RegisterComponent(timeManagerView).AsImplementedInterfaces().AsSelf();
 
         }
     }

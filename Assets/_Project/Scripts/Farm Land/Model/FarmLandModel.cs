@@ -3,6 +3,7 @@ using Farm.Crops.View;
 using Farm.Enums;
 using Farm.FarmLand.Enums;
 using Farm.Inventory.Presenter;
+using Farm.TimeManager.Interfaces;
 using UnityEngine;
 
 namespace Farm.FarmLand.Model
@@ -12,6 +13,7 @@ namespace Farm.FarmLand.Model
 
         public event Action<FarmLandStatus> OnLandStatusChanged;
         public event Action<SeedSO> OnCropPlanted;
+        public event Action OnLandWatered;
         private FarmLandStatus _currentStatus = FarmLandStatus.Land;
         private GameTimeStamp _timeLandWatered;
 
@@ -19,10 +21,12 @@ namespace Farm.FarmLand.Model
         private SeedSO _equipedSeed = null;
 
         private IInventoryProvider _inventoryProvider;
+        private ITimeManager _timeManager;
 
-        public FarmLandModel(IInventoryProvider inventoryProvider)
+        public FarmLandModel(IInventoryProvider inventoryProvider, ITimeManager timeManager)
         {
             _inventoryProvider = inventoryProvider;
+            _timeManager = timeManager;
         }
         public void Interact()
         {
@@ -40,7 +44,7 @@ namespace Farm.FarmLand.Model
             }
 
             SeedSO equipedSeed = equipedTool as SeedSO;
-            if (equipedSeed != null)
+            if (equipedSeed != null && _currentStatus == FarmLandStatus.Plowed)
                 TryPlantCrop(equipedSeed);
         }
 
@@ -52,12 +56,16 @@ namespace Farm.FarmLand.Model
                     if (_currentStatus == FarmLandStatus.Land)
                     {
                         OnLandStatusChanged?.Invoke(FarmLandStatus.Plowed);
+                        _currentStatus = FarmLandStatus.Plowed;
                     }
                     break;
                 case EquipmentType.WateringCan:
                     if (_currentStatus == FarmLandStatus.Plowed)
                     {
                         OnLandStatusChanged?.Invoke(FarmLandStatus.Watered);
+                        _currentStatus = FarmLandStatus.Watered;
+                        _timeLandWatered = _timeManager.GetCurrentTimeStamp();
+                        OnLandWatered?.Invoke();
                     }
                     break;
                 case EquipmentType.Axe:
@@ -74,6 +82,8 @@ namespace Farm.FarmLand.Model
 
             _equipedSeed = seedData;
             OnCropPlanted?.Invoke(_equipedSeed);
+            if (_currentStatus == FarmLandStatus.Watered)
+                OnLandWatered?.Invoke();
             _hasCropPlanted = true;
         }
         public void ClockUpdated(GameTimeStamp timeStamp)
@@ -82,8 +92,17 @@ namespace Farm.FarmLand.Model
             {
                 int elapsedHours = GameTimeStamp.CompareTwoTimeStamps(timeStamp, _timeLandWatered);
                 if (elapsedHours > 24)
+                {
+                    _currentStatus = FarmLandStatus.Plowed;
                     OnLandStatusChanged?.Invoke(FarmLandStatus.Plowed);
+                    OnLandWatered?.Invoke();
+                }
             }
+        }
+        public void HarvestCrop()
+        {
+            _hasCropPlanted = false;
+            _equipedSeed = null;
         }
     }
 }
