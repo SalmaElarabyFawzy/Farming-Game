@@ -18,6 +18,7 @@ using Farm.FarmLand.View;
 using Farm.Crops.View;
 using Farm.Crops.Factory;
 using Farm.TimeManager.View;
+using Farm.HarvestableCrop.Factory;
 
 namespace Farm.Core.DI
 {
@@ -54,6 +55,7 @@ namespace Farm.Core.DI
             builder.Register<EventSystem>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SlotFactory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<ICropFactory>(resolver => new CropFactory(cropView, resolver), Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<IHarvestableCropFactory>(resolver => new HarvestableCropFactory(resolver), Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             // Register Player
             builder.RegisterComponent(playerInteractionsView);

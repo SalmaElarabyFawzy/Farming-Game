@@ -6,6 +6,8 @@ using Farm.Crops.Enums;
 using Farm.Crops.Events;
 using Farm.Crops.Model;
 using Farm.FarmLand.Interfaces;
+using Farm.HarvestableCrop.Factory;
+using Farm.HarvestableCrop.View;
 using Farm.TimeManager.Event;
 using UnityEngine;
 using VContainer;
@@ -16,18 +18,20 @@ namespace Farm.Crops.View
     {
         [SerializeField] private GameObject seed;
         private GameObject _seeding;
-        private GameObject _harvestable;
+        private HarvestableCropView _harvestable;
 
         private EventSystem _eventSystem;
         private CropPresenter _cropPresenter;
 
         private IFarmTile _farmTile;
+        private IHarvestableCropFactory _harvestableCropFactory;
 
         [Inject]
-        public void Construct(EventSystem eventSystem)
+        public void Construct(EventSystem eventSystem, IHarvestableCropFactory harvestableCropFactory)
         {
             Debug.Log("CropView Construct");
             _eventSystem = eventSystem;
+            _harvestableCropFactory = harvestableCropFactory;
             CropModel model = new CropModel();
             _cropPresenter = new CropPresenter(model, this, _eventSystem);
             _cropPresenter.Start();
@@ -49,12 +53,10 @@ namespace Farm.Crops.View
             Debug.Log("CropView InstantiateVisuals");
             _seeding = Instantiate(seeding, transform);
             _seeding.transform.localPosition = Vector3.zero;
-            _harvestable = Instantiate(harvestable, transform);
-            _harvestable.transform.localPosition = Vector3.zero;
-            var harvestableCrop = _harvestable.GetComponent<HarvestableCrop>();
-            if (harvestableCrop != null)
+            _harvestable = _harvestableCropFactory.CreateHarvestableCrop(harvestable.GetComponent<HarvestableCropView>(), transform, Vector3.zero);
+            if (_harvestable != null)
             {
-                harvestableCrop.SetFarmTile(_farmTile);
+                _harvestable.SetFarmTile(_farmTile);
             }
         }
         public void Plant(SeedSO seedData, IFarmTile farmTile)
@@ -76,7 +78,7 @@ namespace Farm.Crops.View
         {
             seed.SetActive(false);
             _seeding.SetActive(false);
-            _harvestable.SetActive(false);
+            _harvestable.gameObject.SetActive(false);
 
             switch (newState)
             {
@@ -87,7 +89,7 @@ namespace Farm.Crops.View
                     _seeding.SetActive(true);
                     break;
                 case CropState.Harvestable:
-                    _harvestable.SetActive(true);
+                    _harvestable.gameObject.SetActive(true);
                     break;
             }
         }

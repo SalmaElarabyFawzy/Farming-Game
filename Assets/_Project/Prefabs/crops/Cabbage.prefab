@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2506295404697276759, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5723314326139808742, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
       propertyPath: m_Convex
       value: 0
@@ -87,10 +91,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8554979865545778643, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5546856589365128758}
+      addedObject: {fileID: 1714616332878664850}
     - targetCorrespondingSourceObject: {fileID: 8554979865545778643, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1714616332878664850}
+      addedObject: {fileID: 7332190356505321694}
   m_SourcePrefab: {fileID: 100100000, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
 --- !u!23 &8426808106231922172 stripped
 MeshRenderer:
@@ -102,21 +106,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8554979865545778643, guid: aec8969d0290c6d4cbc587ef85a01ce4, type: 3}
   m_PrefabInstance: {fileID: 55825573264622947}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5546856589365128758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8538598173674545328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9a5bc8a6bdde44597f8fd512f0106b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HarvestableCrop
-  cropItem: {fileID: 11400000, guid: b7173a2351245bd4a98d07db124a6347, type: 2}
-  highlightIntensity: 1.03
-  cropRenderer: {fileID: 8426808106231922172}
 --- !u!135 &1714616332878664850
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -138,3 +127,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.25
   m_Center: {x: 0, y: 0.14, z: 0}
+--- !u!114 &7332190356505321694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538598173674545328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2193dec9ba725ae4e919c99a248f60e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Farm.HarvestableCrop.View.HarvestableCropView
+  cropItem: {fileID: 11400000, guid: b7173a2351245bd4a98d07db124a6347, type: 2}
+  highlightIntensity: 1.03
+  cropRenderer: {fileID: 8426808106231922172}

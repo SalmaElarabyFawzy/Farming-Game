@@ -1,4 +1,5 @@
 using Assets.Scripts.Interfaces;
+using Farm.HarvestableCrop.View;
 using Farm.Inventory.Presenter;
 using Farm.Player.View;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Farm.Player.Commands
         }
         public bool TryExecuteCutScene(IInteractable interactable)
         {
-            if (interactable is HarvestableCrop)
+            if (interactable is HarvestableCropView)
             {
                 Debug.Log("Harvest Cutscene Executed");
                 cutScenesView.PlayHarvestCutScene();
