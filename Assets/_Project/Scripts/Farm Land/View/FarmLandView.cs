@@ -92,11 +92,9 @@ namespace Farm.FarmLand.View
 
         public void HarvestCrop()
         {
-            if (_currentCrop != null)
-            {
-                _farmPresenter.HarvestCrop();
-                _currentCrop = null;
-            }
+            _farmPresenter.HarvestCrop();
+            _currentCrop = null;
+
         }
 
         public void UpdateLandAppearance(FarmLandStatus _currentStatus)

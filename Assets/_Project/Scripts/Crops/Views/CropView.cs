@@ -77,19 +77,23 @@ namespace Farm.Crops.View
         }
         public void SwitchState(CropState newState)
         {
-            seed.SetActive(false);
-            _seeding.SetActive(false);
-            _harvestable.SetActive(false);
+            if (seed != null)
+                seed.SetActive(false);
+
+            if (_seeding != null)
+                _seeding.SetActive(false);
+            if (_harvestable != null)
+                _harvestable.SetActive(false);
 
             switch (newState)
             {
-                case CropState.Seed:
+                case CropState.Seed when seed != null:
                     seed.SetActive(true);
                     break;
-                case CropState.Seeding:
+                case CropState.Seeding when _seeding != null:
                     _seeding.SetActive(true);
                     break;
-                case CropState.Harvestable:
+                case CropState.Harvestable when _harvestable != null:
                     _harvestable.SetActive(true);
                     break;
             }

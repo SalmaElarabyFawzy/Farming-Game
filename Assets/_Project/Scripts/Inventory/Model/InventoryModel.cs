@@ -83,8 +83,10 @@ namespace Farm.Inventory.Model
         }
         public void ResetEquipedItemOrTool(InventorySlotType type)
         {
-            InventoryEntry equipedEntry = type == InventorySlotType.Item ? equipedItem.GetItemEntry() as InventoryEntry : equipedTool.GetItemEntry() as InventoryEntry;
-            SetItemInEmptyInventorySlot(type, equipedEntry);
+            InventoryHandSlotModel equipedEntry = type == InventorySlotType.Item ? equipedItem : equipedTool;
+            InventoryEntry prevEquipedItem = equipedEntry.GetItemEntry() as InventoryEntry;
+            SetItemInEmptyInventorySlot(type, prevEquipedItem);
+            equipedEntry.SetItemEntry(null);
         }
         public void SetEquipedItemOrTool(int index, InventorySlotType type)
         {
@@ -175,6 +177,7 @@ namespace Farm.Inventory.Model
                 if (entry != null && entry.GetItem() == item)
                 {
                     entry.UpdateQuantity(entry.Quantity + 1);
+                    targetList[i].SetItemEntry(entry);
                     return true;
                 }
             }
